@@ -21,10 +21,14 @@ function initializeCode() {
   ];
   let breed;
   let url;
-  dogs.forEach((item) => {
-    breed = item;
-    getDogs(breed);
-  });
+  
+    async function loopDogs() {
+    for (let item of dogs) {
+      breed = item;
+      await getDogs(breed);
+    }
+  }
+
   async function getDogs() {
     //console.log(breed)
     url = "https://dog.ceo/api/breed/" + breed + "/images/random";
@@ -101,4 +105,5 @@ function initializeCode() {
     cont.append(wikiItem);
     body.append(cont);
   }
+  loopDogs()
 }
