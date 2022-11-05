@@ -21,14 +21,12 @@ function initializeCode() {
   ];
   let breed;
   let url;
-  
-    async function loopDogs() {
+  async function loopDogs() {
     for (let item of dogs) {
       breed = item;
       await getDogs(breed);
     }
   }
-
   async function getDogs() {
     //console.log(breed)
     url = "https://dog.ceo/api/breed/" + breed + "/images/random";
@@ -38,38 +36,40 @@ function initializeCode() {
     dogJSON = await res.json();
     //console.log(dogJSON)
     let src = dogJSON.message;
+    //console.log(src)
     let txt;
     let name;
+    //console.log(breed);
 
-    if (src.substring(30, 31) === "h") {
-      const url2 =
-        "https://en.wikipedia.org/api/rest_v1/page/summary/Husky?redirect=false";
-      const res2 = await fetch(url2);
-      const wiki = await res2.json();
-      name = wiki.title;
-      txt = wiki.extract;
-    } else if (src.substring(30, 31) === "m") {
-      const url2 =
-        "https://en.wikipedia.org/api/rest_v1/page/summary/Alaskan_Malamute?redirect=false";
-      const res2 = await fetch(url2);
-      const wiki = await res2.json();
-      name = wiki.title;
-      txt = wiki.extract;
-    } else if (src.substring(30, 31) === "f") {
+    if (breed === "finnish/lapphund") {
       const url2 =
         "https://en.wikipedia.org/api/rest_v1/page/summary/Finnish_Lapphund?redirect=false";
       const res2 = await fetch(url2);
       const wiki = await res2.json();
       name = wiki.title;
       txt = wiki.extract;
-    } else if (src.substring(30, 31) === "r") {
+    } else if (breed === "husky") {
+      const url2 =
+        "https://en.wikipedia.org/api/rest_v1/page/summary/Husky?redirect=false";
+      const res2 = await fetch(url2);
+      const wiki = await res2.json();
+      name = wiki.title;
+      txt = wiki.extract;
+    } else if (breed === "malamute") {
+      const url2 =
+        "https://en.wikipedia.org/api/rest_v1/page/summary/Alaskan_Malamute?redirect=false";
+      const res2 = await fetch(url2);
+      const wiki = await res2.json();
+      name = wiki.title;
+      txt = wiki.extract;
+    } else if (breed === "retriever/golden") {
       const url2 =
         "https://en.wikipedia.org/api/rest_v1/page/summary/Golden_Retriever?redirect=false";
       const res2 = await fetch(url2);
       const wiki = await res2.json();
       name = wiki.title;
       txt = wiki.extract;
-    } else if (src.substring(30, 31) === "c") {
+    } else if (breed === "collie/border") {
       const url2 =
         "https://en.wikipedia.org/api/rest_v1/page/summary/Border_Collie?redirect=false";
       const res2 = await fetch(url2);
@@ -105,5 +105,5 @@ function initializeCode() {
     cont.append(wikiItem);
     body.append(cont);
   }
-  loopDogs()
+  loopDogs();
 }
